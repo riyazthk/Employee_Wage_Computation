@@ -5,9 +5,11 @@ public class EmWage{
  int totalwages=0;
 
 public void calWageMonth(int cal){
+//To calculate a wages  and fullday or parttime for single day
 int a=wages*cal;
    for(int i=1;i<=30;i++){
    int b=cal*i;
+//follows a steps and calculate a total wages for 100 hours or 20 days
    totalwages=a*i;
      if(b>100 || i>20){
           break;
