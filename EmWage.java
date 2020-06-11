@@ -3,12 +3,16 @@ public class EmWage{
  int fullday=0;
  int parttime=0;
  int totalwages=0;
-public void calWageMonth(int cal){
-   int a=wages*cal;
-   for(int i=1;i<=20;i++){
-     totalwages=a*i;
-   }
 
+public void calWageMonth(int cal){
+int a=wages*cal;
+   for(int i=1;i<=30;i++){
+   int b=cal*i;
+   totalwages=a*i;
+     if(b>100 || i>20){
+          break;
+      }
+   }
 }
 
 public void calculate(int val){
