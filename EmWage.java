@@ -2,16 +2,27 @@ public class EmWage{
  int wages=20;
  int fullday=0;
  int parttime=0;
+ int totalwages=0;
+public void calWageMonth(int cal){
+   int a=wages*cal;
+   for(int i=1;i<=20;i++){
+     totalwages=a*i;
+   }
+
+}
+
 public void calculate(int val){
 int va=val+(int)(Math.random()*2);
  switch(va){
           case 0:
                fullday=8;
-               System.out.println(fullday);
+               calWageMonth(fullday);
+               System.out.println("total wages for full time :" + totalwages);
                break;
           case 1:
                parttime=4;
-               System.out.println(parttime);
+               calWageMonth(parttime);
+               System.out.println("total wages for part time time :" + totalwages);
                break;
    }
 }
