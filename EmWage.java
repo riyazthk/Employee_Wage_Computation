@@ -1,11 +1,17 @@
 public class EmWage{
  int wages=20;
  int fullday=0;
-  
+ int parttime=0;
 public void calculate(int val){
- switch(val){
+int va=val+(int)(Math.random()*2);
+ switch(va){
           case 0:
                fullday=8;
+               System.out.println(fullday);
+               break;
+          case 1:
+               parttime=4;
+               System.out.println(parttime);
                break;
    }
 }
