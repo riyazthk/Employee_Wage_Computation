@@ -10,16 +10,18 @@ public class EmWage {
 	 int numworkingdays;
 	 int workshrpermonth;
 	 String company;
+	 String name;
 	 public final int fulltime=0;
 	 public final int parttime=1;
 	 public int fullday=8;
 	 public int halfday=4;
-	 int totalwages=0;
-	EmWage(String company,int wages,int numworkingdays,int workshrpermonth){
+	 public int totalwages=0;
+	EmWage(String company,String name,int wages,int numworkingdays,int workshrpermonth){
 	  this.company=company;
 	  this.wages=wages;
 	  this.numworkingdays=numworkingdays;
 	  this.workshrpermonth=workshrpermonth;
+	  this.name=name;
 
 	}
 
@@ -37,36 +39,52 @@ public class EmWage {
 	   }
 	}
 
-	public void calculate(){
+	public int calculate(){
 	int va=(int)(Math.random()*2);
 	 switch(va){
 	          case fulltime:
 	               fullday=8;
 	               calWageMonth(fullday);
 	               //System.out.println(company+" " +"total wages for full time :" + totalwages);
-	               break;
+	               return totalwages;
 	          case parttime:
 	               halfday=4;
 	               calWageMonth(parttime);
 	              // System.out.println(company +" "+ "total wages for part time time :" + totalwages);
-	               	               break;
+	               return totalwages;
+ 	               
 	   }
+	 return totalwages;
 	}
 	public static void main(String[] arg){
-	    HashMap< String,Integer> hm=new HashMap<String, Integer>();
+	    HashMap< String,HashMap<String,Integer>> hm=new HashMap<String,HashMap<String,Integer>>();
+	    Scanner sc=new Scanner(System.in);
+    for(int i=0;i<2;i++) {
+    	System.out.println("enter your company name");
+    	String company=sc.next();
+    	System.out.println("enter company wages");
+    	int wages=sc.nextInt();
+    	System.out.println("enter a working days");
+        int numworkingdays=sc.nextInt();
+        System.out.println("enter a hours per month");
+        int workshrpermonth=sc.nextInt();
+    	for (int j=0;j<2;j++) {
+    	System.out.println("enter your name");
+        String name=sc.next();
+        int totalwages=new EmWage(company,name,wages,numworkingdays,workshrpermonth).calculate();
+    	hm.put(name,new HashMap() {{put(company,totalwages);}});
+       
+    	}        
 
-		EmWage ew=new EmWage("dmart",30,30,80);
-		ew.calculate();
-		hm.put(ew.company, ew.totalwages);
-		EmWage ew1=new EmWage("reliance",20,15,100);
-        ew1.calculate();
-		hm.put(ew1.company, ew1.totalwages);
-
-        Set set=hm.entrySet();
+    }
+    System.out.println(hm);
+       Set set=hm.entrySet();
         Iterator iterator =set.iterator();
         while(iterator.hasNext()) {
         	Map.Entry mentry=(Map.Entry)iterator.next();
-        	System.out.println(mentry.getKey() + " = "+ mentry.getValue());
+        	System.out.println(mentry.getKey() + "  "+ mentry.setValue(mentry.getKey()+" "+mentry.getValue())); 
         }
 	}
 }
+    
+
