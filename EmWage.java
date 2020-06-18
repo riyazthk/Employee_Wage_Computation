@@ -6,68 +6,61 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 interface MultipleCompany{
-	public void calWageMonth(int cal);
-	public void employeeWages();
+	public int calWageMonth(int a);
 	public int calculate();
+	public int dailyWage(int a);
 }
 public class EmWage implements MultipleCompany {
-     int wages;
+         int wages;
 	 int numworkingdays;
 	 int workshrpermonth;
 	 String company;
 	 String name;
-	 
-	 
+         int dailywages;
 	 public final int fulltime=0;
 	 public final int parttime=1;
-	 public int fullday=8;
-	 public int halfday=4;
+	 public int hour=0;
 	 public int totalwages=0;
-	EmWage(String company,String name,int wages,int numworkingdays,int workshrpermonth){
+EmWage(String company,String name,int wages,int numworkingdays,int workshrpermonth){
 	  this.company=company;
 	  this.wages=wages;
 	  this.numworkingdays=numworkingdays;
 	  this.workshrpermonth=workshrpermonth;
 	  this.name=name;
-
 	}
 
 
-	public void calWageMonth(int cal){
-	//To calculate a wages  and fullday or parttime for single day
-	int a=wages*cal;
+	public int dailyWage(int hour) {
+	   dailywages=wages*hour;
+	   return dailywages;
+    }
+
+
+	public int calWageMonth(int dailywages){
 	   for(int i=1;i<=numworkingdays;i++){
- 	   int b=cal*i;
-	//follows a steps and calculate a total wages for 100 hours or 20 days
- 	   totalwages=a*i;
- 	     if(b>100 || i>numworkingdays){
-	          break;
-	      }
-	   }
+ 	      int b=wages*i;
+	         //follows a steps and calculate a total wages for 100 hours or 20 days
+ 	         totalwages=dailywages*i;
+ 	         if(b>100 || i>numworkingdays){
+	            break;
+	         }
+	   }return totalwages;
 	}
 
 	public int calculate(){
 	int va=(int)(Math.random()*2);
 	 switch(va){
 	          case fulltime:
-	               fullday=8;
-	               calWageMonth(fullday);
-	               //System.out.println(company+" " +"total wages for full time :" + totalwages);
-	               return totalwages;
+	               hour=8;
+	               return hour;
 	          case parttime:
-	               halfday=4;
-	               calWageMonth(parttime);
-	              // System.out.println(company +" "+ "total wages for part time time :" + totalwages);
-	               return totalwages;
- 	               
+	               hour=4;
+	               return hour;
 	   }
-	 return totalwages;
+	 return hour;
 	}
-	public void employeeWages() {
-    	   	
-	}
-	
-	public static void main(String[] arg){
+
+       public static void main(String[] arg){
 	    HashMap< String,EmWage> hm=new HashMap<String,EmWage>();
 	    Scanner sc=new Scanner(System.in);
 	    for(int i=0;i<2;i++) {
@@ -84,20 +77,25 @@ public class EmWage implements MultipleCompany {
 	        String name=sc.next();
 	        MultipleCompany multipleCompany=new EmWage(company,name,wages,numworkingdays,workshrpermonth);
             EmWage emwage=new EmWage(company,name,wages,numworkingdays,workshrpermonth);
-	        multipleCompany.employeeWages();	
-    		emwage.totalwages=multipleCompany.calculate();
-
-        hm.put(name,emwage);
-       
-    	}        
+    	    int hour=multipleCompany.calculate();
+            emwage.dailywages=multipleCompany.dailyWage(hour);
+            int daily=emwage.dailywages;
+            emwage.totalwages=multipleCompany.calWageMonth(daily);
+            hm.put(name,emwage);
+    	}
 
     }
     Iterator<Entry<String, EmWage>> it=hm.entrySet().iterator();
     while(it.hasNext()) {
     	Map.Entry<String, EmWage>li=(Map.Entry<String, EmWage>)it.next();
-    	System.out.println(li.getKey() + " = "+li.getValue().company +" "+ li.getValue().totalwages );
+    	System.out.println(li.getKey() + " = "+li.getValue().company +" "+ li.getValue().totalwages +" "+li.getValue().dailywages);
     }
   }
+
+
+	
+
+	
 }
     
 
