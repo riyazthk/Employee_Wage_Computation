@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 interface MultipleCompany{
-	public int calWageMonth(EmWage emwage);
+        int calWageMonth(EmWage emwage);
 	public int calculate();
 	public int dailyWage(EmWage emwage );
 }
@@ -55,8 +55,8 @@ public class EmWage implements MultipleCompany {
 	public static void main(String[] arg){
 	    HashMap< String,EmWage> hm=new HashMap<String,EmWage>();
 	    Scanner sc=new Scanner(System.in);
-	    for(int i=0;i<2;i++) {
-	    	EmWage emwage=new EmWage();
+              EmWage emwage=new EmWage();
+        	for(int i=0;i<2;i++) {
 	    	System.out.println("enter your company name");
 	    	emwage.company=sc.next();
 	    	System.out.println("enter company wages");
@@ -80,7 +80,13 @@ public class EmWage implements MultipleCompany {
 	    while(it.hasNext()) {
 	    	Map.Entry<String, EmWage>li=(Map.Entry<String, EmWage>)it.next();
 	    	System.out.println(li.getKey() + " = "+li.getValue().company +" "+ li.getValue().totalwages +" "+li.getValue().dailywages);
-    }
+     } String search_company=sc.next();
+    if(emWage.company.containskey(search_company)){
+      System.out.println(emWage.company);
+}else{
+    System.out.println("company not available");
+}
+
    }
   }
 
